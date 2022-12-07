@@ -57,8 +57,7 @@ def total(path, t):
                 newpath = f"/{x}"
             else:
                 newpath = f"{path}/{x}"
-            t += total(newpath, t)
-    print(t)
+            t += total(newpath, 0)
     return t
 
 result = 0
@@ -73,12 +72,31 @@ print(result)
 
 # drive space 70000000
 # free space needed 30000000
-# size of /
 totalSpace = 70000000
 spaceNeeded = 30000000
 spaceMax = totalSpace - spaceNeeded
-totalSize = total("/", 0) # this number is way too big...
+totalSize = total("/", 0) # size of /
+deleteSize = totalSize - spaceMax
 
-print(spaceMax, totalSize)
+delDirs = list()
+# find dir closest to delete size
+for k in dirs:
+    amount = total(k, 0)
+    if amount >= deleteSize:
+        delDirs.append(amount) # if I needed the folder name I could add K and make this a dictionary, I don't so I won't complicate this further
+
+# sort the list by ascending and print lowest value
+sorted = 0
+while sorted != -1:
+    for x in range(len(delDirs)-1):
+        if delDirs[x] > delDirs[x+1]:
+            sorted = 1
+            delDirs[x], delDirs[x+1] = delDirs[x+1], delDirs[x]
+    if sorted == 0:
+        sorted = -1
+    else:
+        sorted = 0
+
+print(delDirs[0])
 
 # looked at this guy for some inspiration https://github.com/tobstern/AoC2022/blob/master/day07.py

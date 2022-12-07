@@ -1,0 +1,23 @@
+$ cd /
+$ ls
+dir one
+dir two
+dir three
+5 file
+10 file
+$ cd one
+$ ls
+dir two
+3 file
+$ cd two
+$ ls
+2 file
+$ cd ..
+$ cd ..
+$ cd two
+$ ls
+4 file
+$ cd ..
+$ cd three
+$ ls
+1 file
