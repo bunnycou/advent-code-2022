@@ -77,7 +77,7 @@ print(result)
 totalSpace = 70000000
 spaceNeeded = 30000000
 spaceMax = totalSpace - spaceNeeded
-totalSize = total("/", 0)
+totalSize = total("/", 0) # this number is way too big...
 
 print(spaceMax, totalSize)
 
