@@ -45,3 +45,69 @@ print(total)
 
 scenicScore = 0
 scenicSpot = [0, 0]
+score = 0
+
+#need to go from tree and out, start would be tree position and end would be the edge (could be 0 or max size)
+# after would need to go up and before would need to go down
+def sceneScore(list, line, char):
+    tree = int(list[line][char])
+    total = 1
+
+    taller = False
+    start = line+1
+    end = len(list)-1
+    if start <= end:
+        while not taller and start < end: # from tree down
+            if int(list[start][char]) >= tree:
+                taller = True
+            else:
+                start += 1
+        total *= (start - line)
+    else: total = 0
+
+    taller = False
+    start = char+1
+    end = len(list[0])-1
+    if start <= end:
+        while not taller and start < end: # from tree to right
+            if int(list[line][start]) >= tree:
+                taller = True
+            else:
+                start += 1
+        total *= (start - char)
+    else: total = 0
+
+    taller = False
+    start = char-1
+    end = 0
+    if start >= end:
+        while not taller and start > end: # from tree to left
+            if int(list[line][start]) >= tree:
+                taller = True
+            else:
+                start -= 1
+        total *= (char - start)
+    else: total = 0
+
+    taller = False
+    start = line-1
+    end = 0
+    if start >= end:
+        while not taller and start > end: # from tree up
+            if int(list[start][char]) >= tree:
+                taller = True
+            else:
+                start -= 1
+        total *= (line - start)
+    else: total = 0
+    
+    return total
+
+for l in range(listLength): # each line
+    for c in range(lineLength): # each char in a line
+        score = sceneScore(lines, l, c)
+        if score > scenicScore:
+            scenicScore = score
+            scenicSpot = [l, c]
+            
+print(scenicScore)
